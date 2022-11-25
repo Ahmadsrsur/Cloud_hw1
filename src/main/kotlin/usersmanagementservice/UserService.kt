@@ -2,7 +2,7 @@ package usersmanagementservice
 
 import org.springframework.stereotype.Repository
 
-@Repository
+
 interface UserService {
 
     fun createUser(userBoundary: UserBoundary):UserBoundary
@@ -11,4 +11,5 @@ interface UserService {
     fun updateUser(email:String): UserBoundary
     fun deleteUsers()
     fun getAllUsers(size: Int, page: Int, sortBy: String, order: String):ArrayList<UserBoundary>
+    fun getAllUsersbyEmailDomain()
 }

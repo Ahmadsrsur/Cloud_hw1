@@ -57,9 +57,13 @@ class UserController(
         return this.userService.deleteUsers()
     }
 
+
+  //  @RequestParam -- when you have a ?
+    // @PathVariable -- if you have a parameter in URL like " /hello/{messageid} "
     @RequestMapping(
         path = ["/users/search?size={size}&page={page} &sortBy={sortAttribute}&sortOrder={order}"],
         method = [RequestMethod.GET],
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getAllUsers(@RequestParam("size") size:Int ,
                     @RequestParam("page") page:Int,
@@ -68,5 +72,31 @@ class UserController(
         var alist: ArrayList<UserBoundary>? = userService.getAllUsers(size,page,sortBy,order)
         return alist
     }
+
+    // GET /users/search?criteriaType=byEmailDomain&criteriaValue={value}&size={size}&page={page}&sortBy={sortAttribute}&sortOrder={order}
+    // for example in the mail srsurahmad@gmail.com , if I sorted byEmailDomain so the criteriaValue = gmail.com
+
+    @RequestMapping(
+        path = ["/users/search?criteriaType=byEmailDomain&criteriaValue={value}&size={size}&page={page}&sortBy={sortAttribute}&sortOrder={order}"],
+        method = [RequestMethod.GET],
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getAllUsersByEmailDomain(@RequestParam("value") domain:String ,
+                    @RequestParam("size") size:Int,
+                    @RequestParam("page") page:Int,
+                    @RequestParam("sortAttribute") sortBy: String,
+                    @RequestParam("order") order :String):ArrayList<UserBoundary>?{
+        var alist: ArrayList<UserBoundary>? = userService.getAllUsers(size,page,sortBy,order)
+        return alist
+
+
+    }
+
+
+
+
+
+
+
 
 }

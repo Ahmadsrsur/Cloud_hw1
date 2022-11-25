@@ -7,7 +7,7 @@ class UserBoundary {
     var id:String? = null
     var email:String? = null
     var name:Map<String,String>? =null
-    var birthdate:Date? = null
+    var birthdate:String? = null
     var roles:ArrayList<String>? = null
 
     override fun toString(): String {
